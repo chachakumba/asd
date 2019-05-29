@@ -4,19 +4,28 @@ using UnityEngine;
 
 public class OnCollision : MonoBehaviour
 {
-    public static GameObject explosion;
-    public static GameObject bullet;
+    public GameObject explosion;
 
     private void OnCollisionEnter(Collision collision)
     {
         
             Instantiate(explosion, transform.position, transform.rotation);
-            Destroy(bullet);
+            Destroy(gameObject);
     }
     
-    static void selfDestroy()
+    void selfDestroy()
     {
         Instantiate(explosion, transform.position, transform.rotation);
-        Destroy(bullet);
+        Destroy(gameObject);
+    }
+    IEnumerator shootRange()
+    {
+        yield return new WaitForSeconds(3);
+        selfDestroy();
+    }
+
+    private void Start()
+    {
+        StartCoroutine(shootRange());
     }
 }

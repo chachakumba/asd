@@ -25,13 +25,10 @@ public class shoot : MonoBehaviour
             Rigidbody clone;
             clone = Instantiate(projectile, transform.position, transform.rotation) as Rigidbody;
             clone.velocity = transform.TransformDirection(Vector3.forward * speedAmm);
-            StartCoroutine(shootRange(clone));
+            
         }
         
     }
-    IEnumerator shootRange (Rigidbody obj)
-    {
-        yield return new WaitForSeconds(3);
-        obj.selfDestroy();
-    }
+    
+    
 }
